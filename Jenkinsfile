@@ -3,22 +3,15 @@ pipeline {
 
     stages {
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo "Running from GitHub Jenkinsfile"
-                sh 'whoami'
+                sh 'docker build -t jenkins-demo ./jenkins-docker'
             }
         }
 
-        stage('Test') {
+        stage('Run Container') {
             steps {
-                sh 'pwd'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo "Pipeline executed successfully"
+                sh 'docker run --rm jenkins-demo'
             }
         }
 
